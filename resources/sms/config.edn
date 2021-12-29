@@ -2,14 +2,13 @@
  {:duct.core/project-ns sms
 
   :duct.router/cascading
-  [#ig/ref [:sms.handler/example]]
+  [#ig/ref [:sms.handler/api]]
 
-  :sms.handler/example {}}
+  :sms.handler/api {}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
  :duct.profile/prod  {}
 
  :duct.module/logging {}
- :duct.module.web/api
- {}}
+ :duct.module.web/api {}}
