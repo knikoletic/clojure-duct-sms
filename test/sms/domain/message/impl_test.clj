@@ -24,14 +24,14 @@
           request (select-keys expected-message [:receiver :text])
           result (service/send! (map->MessageServiceImpl conf)
                                 request)]
-      (t/is (= expected-message result))))
+      (t/is (= expected-message result)))))
 
-  (t/testing "should return an error"
-    (let [conf {:sender
-                (reify sender/Sender
-                  (send! [_ message]
-                    {:error :unexpected-error}))}
-          request (select-keys expected-message [:receiver :text])
-          result (service/send! (map->MessageServiceImpl conf)
-                                request)]
-      (t/is (= {:error :unexpected-error} result)))))
+(t/testing "should return an error"
+  (let [conf {:sender
+              (reify sender/Sender
+                (send! [_ message]
+                  {:error :unexpected-error}))}
+        request (select-keys expected-message [:receiver :text])
+        result (service/send! (map->MessageServiceImpl conf)
+                              request)]
+    (t/is (= {:error :unexpected-error} result))))

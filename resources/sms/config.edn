@@ -4,11 +4,18 @@
   :duct.router/cascading
   [#ig/ref [:sms.handler/api]]
 
-  :sms.handler/api {}}
-
+:sms.boundaries/sms-gateway
+  {:logger #ig/ref :duct/logger
+   :url #duct/env ["SMS_GATEWAY_URL" Str]}
+  :sms.services.message/service
+  {:sender #ig/ref :sms.boundaries/sms-gateway}
+  :sms.handler/api
+  {:message-service #ig/ref :sms.services.message/service}}
+ 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
  :duct.profile/prod  {}
 
  :duct.module/logging {}
- :duct.module.web/api {}}
+ :duct.module.web/api
+ {}}
